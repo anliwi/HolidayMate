@@ -5,8 +5,10 @@ Created on Sun Nov 14 13:59:12 2021
 @author: Krishna
 
 
-Not working correctly yet. Requires a target variable that our dataset doesn't have. 
-I will edit the math a bit and push a new version soon.
+* Decision tree and related functions
+* Call fit() at start to generate tree
+* Call getNextNode() iteratively to traverse tree
+* Random suggestion in case we can't narrow it down to one is not yet implemented
 
 
 """
@@ -15,132 +17,85 @@ import numpy as np
 import pandas as pd
 eps = numpy.finfo(float).eps
 from numpy import log2 as log
+from random import randint
 
 
-dsp = "C:\\Users\\Asus\\HolidayMate\\Database Holiday Mate - Sheet1.csv"
-'''---------------------------------------------------
-outlook = 'overcast,overcast,overcast,overcast,rainy,rainy,rainy,rainy,rainy,sunny,sunny,sunny,sunny,sunny'.split(',')
-temp = 'hot,cool,mild,hot,mild,cool,cool,mild,mild,hot,hot,mild,cool,mild'.split(',')
-humidity = 'high,normal,high,normal,high,normal,normal,normal,high,high,high,high,normal,normal'.split(',')
-windy = 'FALSE,TRUE,TRUE,FALSE,FALSE,FALSE,TRUE,FALSE,TRUE,FALSE,TRUE,FALSE,FALSE,TRUE'.split(',')
-play = 'yes,yes,yes,yes,yes,yes,no,yes,no,no,no,no,yes,yes'.split(',')
-
-dataset ={'outlook':outlook,'temp':temp,'humidity':humidity,'windy':windy,'play':play}
-df = pd.DataFrame(dataset,columns=['outlook','temp','humidity','windy','play'])
-
---------------------------------------------------'''
-
-
-
-entropy_node = 0  #Initialize Entropy
-values = df.play.unique()  #Unique objects - 'Yes', 'No'
-for value in values:
-    fraction = df.play.value_counts()[value]/len(df.play)  
-    entropy_node += -fraction*np.log2(fraction)
-    
-    
-def ent(df,attribute):
-    target_variables = df.play.unique()  #This gives all 'Yes' and 'No'
-    variables = df[attribute].unique()    #This gives different features in that attribute (like 'Sweet')
-
-
-    entropy_attribute = 0
-    for variable in variables:
-        entropy_each_feature = 0
-        for target_variable in target_variables:
-            num = len(df[attribute][df[attribute]==variable][df.play ==target_variable]) #numerator
-            den = len(df[attribute][df[attribute]==variable])  #denominator
-            fraction = num/(den+eps)  #pi
-            entropy_each_feature += -fraction*log(fraction+eps) #This calculates entropy for one feature like 'Sweet'
-        fraction2 = den/len(df)
-        entropy_attribute += -fraction2*entropy_each_feature   #Sums up all the entropy ETaste
-
-    return(abs(entropy_attribute))
-
-def ig(e_dataset,e_attr):
-    return(e_dataset-e_attr)
-
-#entropy_node = entropy of dataset
-#a_entropy[k] = entropy of k(th) 
-attrIG = {k:ig(entropy_node,a_entropy[k]) for k in a_entropy}
-
-#*******************************************
-
-def find_entropy(df):
-    Class = df.keys()[-1]   #To make the code generic, changing target variable class name
-    entropy = 0
-    values = df[Class].unique()
-    for value in values:
-        fraction = df[Class].value_counts()[value]/len(df[Class])
-        entropy += -fraction*np.log2(fraction)
-    return entropy
-  
-  
-def find_entropy_attribute(df,attribute):
-  Class = df.keys()[-1]   #To make the code generic, changing target variable class name
-  target_variables = df[Class].unique()  #This gives all 'Yes' and 'No'
-  variables = df[attribute].unique()    #This gives different features in that attribute (like 'Hot','Cold' in Temperature)
-  entropy2 = 0
-  for variable in variables:
-      entropy = 0
-      for target_variable in target_variables:
-          num = len(df[attribute][df[attribute]==variable][df[Class] ==target_variable])
-          den = len(df[attribute][df[attribute]==variable])
-          fraction = num/(den+eps)
-          entropy += -fraction*log(fraction+eps)
-      fraction2 = den/len(df)
-      entropy2 += -fraction2*entropy
-  return abs(entropy2)
-
-
-def find_winner(df):
-    Entropy_att = []
-    IG = []
-    for key in df.keys()[:-1]:
-#         Entropy_att.append(find_entropy_attribute(df,key))
-        IG.append(find_entropy(df)-find_entropy_attribute(df,key))
-    return df.keys()[:-1][np.argmax(IG)]
-  
-  
-def get_subtable(df, node,value):
-  return df[df[node] == value].reset_index(drop=True)
-
-
-def buildTree(df,tree=None): 
-    Class = df.keys()[-1]   #To make the code generic, changing target variable class name
-    
-    #Here we build our decision tree
-
-    #Get attribute with maximum information gain
-    node = find_winner(df)
-    
-    #Get distinct value of that attribute e.g Salary is node and Low,Med and High are values
-    attValue = np.unique(df[node])
-    
-    #Create an empty dictionary to create tree    
-    if tree is None:                    
-        tree={}
-        tree[node] = {}
-    
-   #We make loop to construct a tree by calling this function recursively. 
-    #In this we check if the subset is pure and stops if it is pure. 
-
-    for value in attValue:
+class decTree():
+    def __init__(self):
+        self.tree = {}
+        self.df = None
         
-        subtable = get_subtable(df,node,value)
-        clValue,counts = np.unique(subtable['Eat'],return_counts=True)                        
+    def getTree(self):
+        return self.tree
+    
+    def getNextNode(self, nodes):
+        #Called iteratively by frontend to traverse decision tree according to user input
+        #nodes is a list of alternating attributes and their values, that frontend has gone through till now
+        #Returns (bool, node). first value is 1 if returning a suggestion, 0 if returning the next attribute to question
+        if len(nodes) == 0:
+            nn = list(self.tree.keys())[0]
+            nodes.append(nn)
+            return (0, nn)
+        currDict = self.tree
+        for node in nodes:
+            currDict = currDict[node]
+        if isinstance(currDict, dict):
+            nn = list(currDict.keys())[0]
+            nodes.append(nn)
+            return (0, nn)
+        else:
+            return (1, currDict)
         
-        if len(counts)==1:#Checking purity of subset
-            tree[node][value] = clValue[0]                                                    
-        else:        
-            tree[node][value] = buildTree(subtable) #Calling the function recursively 
-                   
-    return tree
-
-
-
-
-
-
-
-
+    def fit(self, df, maxDepth=6):
+        #Call initially to generate tree
+        #df is required pandas dataframe, maxDepth is the maximum depth of the generated tree
+        #No return value but generates tree
+        self.df = df
+        self.tree = self.createTree(df, maxDepth)
+    
+    def calcEnt(self, attr, df):
+        #Calculates entropy
+        #May not use the exact correct formula for entropy, but it works
+        num = len(df.loc[df[attr] == 1])
+        den = len(df)
+        ent = 2*(0.5 - abs(0.5 - num/den))
+        return ent
+    
+    def buildTreeRec(self, df, currDepth, maxDepth):
+        #Recursively generates tree, recursion depth controlled by maxDepth
+        tree = {}
+        node = {}
+        attrs = list(df.columns)
+        ents = {}
+        for attr in attrs[1:]:
+            ent = self.calcEnt(attr, df)
+            ents[attr] = ent
+        maxEntAttr = max(ents, key = ents.get)
+        #print("depth: ", currDepth, "attribute: ", maxEntAttr, "rows: ", len(df), "columns: ", len(attrs))
+        df0 = df.loc[df2[maxEntAttr] == 0].drop([maxEntAttr], axis = 1)
+        df1 = df.loc[df2[maxEntAttr] == 1].drop([maxEntAttr], axis = 1)
+        
+        if len(df0) == 0 or len(df1) == 0:
+            return list(df["HolidayPlace"])[0]
+        
+        if len(df0) == 1 or currDepth > maxDepth:
+            s = list(df0["HolidayPlace"])[0]
+            node[0] = s
+        else:
+            node[0] = self.buildTreeRec(df0, currDepth+1, maxDepth)
+        if len(df1) == 1 or currDepth > maxDepth:
+            node[1] = list(df1["HolidayPlace"])[0]
+        else:
+            node[1] = self.buildTreeRec(df1, currDepth+1, maxDepth)
+            
+        tree[maxEntAttr] = node
+        
+        return tree
+    
+    def createTree(self, df, maxDepth):
+        #Gives initial call for the recursive function
+        #returns tree
+        tree = self.buildTreeRec(df, 0, maxDepth)
+        return tree
+    
+        
