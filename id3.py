@@ -15,10 +15,9 @@ Created on Sun Nov 14 13:59:12 2021
 
 import numpy as np
 import pandas as pd
-eps = numpy.finfo(float).eps
 from numpy import log2 as log
 from random import randint
-
+eps = np.finfo(float).eps
 
 class decTree():
     def __init__(self):
@@ -72,8 +71,8 @@ class decTree():
             ents[attr] = ent
         maxEntAttr = max(ents, key = ents.get)
         #print("depth: ", currDepth, "attribute: ", maxEntAttr, "rows: ", len(df), "columns: ", len(attrs))
-        df0 = df.loc[df2[maxEntAttr] == 0].drop([maxEntAttr], axis = 1)
-        df1 = df.loc[df2[maxEntAttr] == 1].drop([maxEntAttr], axis = 1)
+        df0 = df.loc[df[maxEntAttr] == 0].drop([maxEntAttr], axis = 1)
+        df1 = df.loc[df[maxEntAttr] == 1].drop([maxEntAttr], axis = 1)
         
         if len(df0) == 0 or len(df1) == 0:
             return list(df["HolidayPlace"])[0]
