@@ -18,7 +18,7 @@ from numpy import log2 as log
 
 
 dsp = "C:\\Users\\Asus\\HolidayMate\\Database Holiday Mate - Sheet1.csv"
-#---------------------------------------------------
+'''---------------------------------------------------
 outlook = 'overcast,overcast,overcast,overcast,rainy,rainy,rainy,rainy,rainy,sunny,sunny,sunny,sunny,sunny'.split(',')
 temp = 'hot,cool,mild,hot,mild,cool,cool,mild,mild,hot,hot,mild,cool,mild'.split(',')
 humidity = 'high,normal,high,normal,high,normal,normal,normal,high,high,high,high,normal,normal'.split(',')
@@ -28,7 +28,7 @@ play = 'yes,yes,yes,yes,yes,yes,no,yes,no,no,no,no,yes,yes'.split(',')
 dataset ={'outlook':outlook,'temp':temp,'humidity':humidity,'windy':windy,'play':play}
 df = pd.DataFrame(dataset,columns=['outlook','temp','humidity','windy','play'])
 
-#--------------------------------------------------
+--------------------------------------------------'''
 
 
 
