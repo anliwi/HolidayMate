@@ -74,15 +74,16 @@ class decTree():
         df0 = df.loc[df[maxEntAttr] == 0].drop([maxEntAttr], axis = 1)
         df1 = df.loc[df[maxEntAttr] == 1].drop([maxEntAttr], axis = 1)
         
-        if len(df0) == 0 or len(df1) == 0:
+        if len(df0) == 0 or len(df1) == 0 or currDepth > maxDepth:
             return list(df["HolidayPlace"])[0]
         
-        if len(df0) == 1 or currDepth > maxDepth:
-            s = list(df0["HolidayPlace"])[0]
-            node[0] = s
+        if len(df0) == 1:
+            node[0] = list(df0["HolidayPlace"])[0]
+             
         else:
             node[0] = self.buildTreeRec(df0, currDepth+1, maxDepth)
-        if len(df1) == 1 or currDepth > maxDepth:
+            
+        if len(df1) == 1:
             node[1] = list(df1["HolidayPlace"])[0]
         else:
             node[1] = self.buildTreeRec(df1, currDepth+1, maxDepth)
@@ -94,6 +95,7 @@ class decTree():
     def createTree(self, df, maxDepth):
         #Gives initial call for the recursive function
         #returns tree
+        maxDepth = maxDepth - 1
         tree = self.buildTreeRec(df, 0, maxDepth)
         return tree
     
