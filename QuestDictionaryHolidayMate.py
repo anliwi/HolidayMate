@@ -12,7 +12,7 @@ Quest_HM = {
     "Mountains" : "Do you want to stay in or close by the mountains?",
     "Hotel" : "Fancy the comforts of a hotel?",
     "Hostel" : "Prefer the sociability and budget choice of a hostel?",
-    "Camping":"Are you up for camping?"
+    "Camping":"Are you up for camping?",
     "Train" : "Are you in for a train ride?",
     "Train+Bike" : "Want to mix comfort and activity - taking a train-bike combo to arrive?",
     "Bus" : "Would you be willing to take the bus to arrive at your destination?",
