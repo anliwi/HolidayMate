@@ -6,7 +6,7 @@ Quest_HM = QuestDictionaryHolidayMate.Quest_HM
 
 D = decTree()
 df = pd.read_csv("Database Holiday Mate - Sheet1.csv")
-D.fit(df)
+D.fit(df, maxDepth = 2)
 print(D.getTree())
 print("\n\n\n\n\n\n")
 
@@ -25,3 +25,5 @@ while c == 0:
             r = 0
         nodes.append(r)
 print("end")
+
+
