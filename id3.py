@@ -44,7 +44,7 @@ class decTree():
             return (0, nn)
         else:
             if isinstance(currDict, list):
-                r = randint(0, len(currDict))
+                r = randint(0, len(currDict)-1)
                 currDict = currDict[r]
             return (1, currDict)
         
