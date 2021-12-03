@@ -8,7 +8,7 @@ Created on Sun Nov 14 13:59:12 2021
 * Decision tree and related functions
 * Call fit() at start to generate tree
 * Call getNextNode() iteratively to traverse tree
-* Random suggestion in case we can't narrow it down to one is not yet implemented
+
 
 
 """
