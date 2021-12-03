@@ -1,14 +1,13 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[8]:
 
 
 Quest_HM = {
     "City" : "Do you want to explore a city?",
     "Countryside" : "Do you want to see the countryside?",
     "Seaside" : "Do you want to stay by the ocean?",
-    "River" : "Fancy a river in the sourrindings?",
+    "Riverside" : "Fancy a river in the sourrindings?",
     "Mountains" : "Do you want to stay in or close by the mountains?",
     "Hotel" : "Fancy the comforts of a hotel?",
     "Hostel" : "Prefer the sociability and budget choice of a hostel?",
@@ -25,19 +24,6 @@ Quest_HM = {
 }
 
 
-# In[9]:
-
-
-print(Quest_HM['City'])
-
-
-# In[10]:
-
-
-print(Quest_HM)
-
-
-# In[ ]:
 
 
 

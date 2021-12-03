@@ -43,6 +43,9 @@ class decTree():
             nodes.append(nn)
             return (0, nn)
         else:
+            if isinstance(currDict, list):
+                r = randint(0, len(currDict))
+                currDict = currDict[r]
             return (1, currDict)
         
     def fit(self, df, maxDepth=6):
@@ -75,7 +78,7 @@ class decTree():
         df1 = df.loc[df[maxEntAttr] == 1].drop([maxEntAttr], axis = 1)
         
         if len(df0) == 0 or len(df1) == 0 or currDepth > maxDepth:
-            return list(df["HolidayPlace"])[0]
+            return list(df["HolidayPlace"])
         
         if len(df0) == 1:
             node[0] = list(df0["HolidayPlace"])[0]
