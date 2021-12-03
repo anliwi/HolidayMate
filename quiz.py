@@ -35,17 +35,17 @@ class Quiz:
         clear()
         self.a1="yes"
         self.a2="no"
-        self.antw1 = Button(window, text="yes",font=("Arial",14), command=lambda: self.SetResponse(1))
-        self.antw2 = Button(window, text="no",font=("Arial",14), command=lambda: self.SetResponse(0)) 
-        self.naechste = Button(window,text="Next",font=("Arial",14),command=self.Question) # STILL OPEN: adjust to: only works if a button was clicked
-        self.lock=False
+        self.answ1 = Button(window, text="Yes",font=("Arial",14), command=lambda: self.SetResponse(1))
+        self.answ2 = Button(window, text="No",font=("Arial",14), command=lambda: self.SetResponse(0)) 
+        self.next = Button(window,text="Next",font=("Arial",14),command=self.Question) # STILL OPEN: adjust to: only works if a button was clicked
+        self.lock = False
         self.response = None
         self.nodes = []
         self.Question()
 
 
     def Question(self): 
-        self.naechste.grid(column=0,row=3,pady=5)    
+        self.next.grid(column=0,row=3,pady=5)    
         c, nn = D.getNextNode(self.nodes)
         if c == 0:
             self.lock = False
@@ -55,8 +55,8 @@ class Quiz:
             question.grid(column=0, row=0, padx=80,pady=(75,0))
 
 
-            self.antw1.grid(column=0, row=1,pady=(8,5))
-            self.antw2.grid(column=0, row=2,pady=5)
+            self.answ1.grid(column=0, row=1,pady=(8,5))
+            self.answ2.grid(column=0, row=2,pady=5)
 
 
         else:
@@ -69,9 +69,9 @@ class Quiz:
     def SetResponse(self,value):
         if self.lock == False: 
             if value == 1:
-                self.antw1.configure(bg="green")
+                self.answ1.configure(bg="green")
             else:
-                self.antw2.configure(bg="green")     
+                self.answ2.configure(bg="green")     
             self.response = value
             self.nodes.append(value)
             self.lock = True
