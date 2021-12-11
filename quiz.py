@@ -44,21 +44,16 @@ class Quiz:
         self.QuestionTag.grid(column=0,row=1,columnspan=2,pady=10,sticky=N)
         self.QuestionTag.config(font=("Arial", 20), bg="#f4e8d9", fg="#b28761")
         self.QuestionTag.insert(END,"Tell us about your holiday preferences:")
+        self.QuestionTag.config(state=DISABLED)
         self.QuestionTag.tag_configure("tag_name", justify='center')
         self.QuestionTag.tag_add("tag_name", "1.0", "end")
 
         self.a1="yes"
         self.a2="no"
-<<<<<<< Updated upstream
-        self.antw1 = Button(window, text="yes",font=("Arial",14), command=lambda: self.SetResponse(1))
-        self.antw2 = Button(window, text="no",font=("Arial",14), command=lambda: self.SetResponse(0)) 
-        self.naechste = Button(window,text="Next",font=("Arial",14),command=self.Question) # STILL OPEN: adjust to: only works if a button was clicked
-=======
-        self.antw1 = Button(window, text="yes",font=("Arial",14), command=lambda: self.SetResponse(1),width=10, height=2,bd=0, highlightthickness=0, relief='ridge')
-        self.antw2 = Button(window, text="no",font=("Arial",14), command=lambda: self.SetResponse(0),width=10, height=2,bd=0, highlightthickness=0, relief='ridge') 
-        self.naechste = Button(window,text="Next",font=("Arial",14),command=self.Question,width=10, height=2,bd=0, highlightthickness=0, relief='ridge') # STILL OPEN: adjust to: only works if a button was clicked
+        self.answ1 = Button(window, text="yes",font=("Arial",14), command=lambda: self.SetResponse(1),width=10, height=2,bd=0, highlightthickness=0, relief='ridge')
+        self.answ2 = Button(window, text="no",font=("Arial",14), command=lambda: self.SetResponse(0),width=10, height=2,bd=0, highlightthickness=0, relief='ridge') 
+        self.next = Button(window,text="Next",font=("Arial",14),command=self.Question,width=10, height=2,bd=0, highlightthickness=0, relief='ridge') # STILL OPEN: adjust to: only works if a button was clicked
         self.toMenu = Button(window, text="Back to Menu",font=("Arial",14),command=menuCreator, width=10, height=2,bd=0, highlightthickness=0, relief='ridge')
->>>>>>> Stashed changes
         self.lock=False
         self.response = None
         self.nodes = []
@@ -66,29 +61,21 @@ class Quiz:
 
 
     def Question(self): 
-<<<<<<< Updated upstream
-        self.naechste.grid(column=0,row=3,pady=5)    
-=======
-        self.naechste.grid(column=1,row=5,pady=(20,0),sticky=SW)    
->>>>>>> Stashed changes
+        self.next.grid(column=1,row=5,pady=(20,0),ipadx=2,sticky=SW)    
         c, nn = D.getNextNode(self.nodes)
         if c == 0:
             self.lock = False
             questiontext = (str(Quest_HM[nn])) 
-            question = Text(window, font=("Arial",20), width=40, height=1,bg="#f1f1f1",fg="#0F401B",highlightbackground="#0F401B")
+            question = Text(window, font=("Arial",20), width=60, height=1,bg="#f1f1f1",fg="#0F401B",highlightbackground="#0F401B")
             question.insert(END,questiontext)
+            question.config(state=DISABLED)
             question.grid(column=0, row=2,columnspan=2,padx=200,sticky=N)
             question.tag_configure("tag_name", justify='center')
             question.tag_add("tag_name", "1.0", "end")
 
-<<<<<<< Updated upstream
-            self.antw1.grid(column=0, row=1,pady=(8,5))
-            self.antw2.grid(column=0, row=2,pady=5)
-=======
->>>>>>> Stashed changes
 
-            self.antw1.grid(column=0, row=4,pady=(8,5), sticky=SE)
-            self.antw2.grid(column=1, row=4,pady=5, sticky=SW)
+            self.answ1.grid(column=0, row=4,pady=(8,5), sticky=SE)
+            self.answ2.grid(column=1, row=4,pady=5, sticky=SW)
             self.toMenu.grid(column=0,row=5,pady=(20,0),sticky=SE)
 
         else:
@@ -122,6 +109,7 @@ class Menu:
         self.Description1.grid(column=0,row=2,columnspan=3,pady=10)
         self.Description1.config(font=("Arial", 16), bg="#f4e8d9", fg="#0F401B")
         self.Description1.insert(END,"Ever wondered where to go on holiday during the corona pandemic? \nFound yourself trying to understand German websites about local destinations?")
+        self.Description1.config(state=DISABLED)
         self.Description1.tag_configure("tag_name", justify='center')
         self.Description1.tag_add("tag_name", "1.0", "end")
 
@@ -129,6 +117,7 @@ class Menu:
         self.Description2.grid(column=0,row=3,columnspan=3,pady=10)
         self.Description2.config(font='arial 16 bold', bg="#f4e8d9", fg="#0F401B")
         self.Description2.insert(END,"Well, we got a little something for you: HolidayMate.")
+        self.Description2.config(state=DISABLED)
         self.Description2.tag_configure("tag_name", justify='center')
         self.Description2.tag_add("tag_name", "1.0", "end")
 
@@ -136,6 +125,7 @@ class Menu:
         self.Description3.grid(column=0,row=4,columnspan=3,pady=10)
         self.Description3.config(font=("Arial", 16), bg="#f4e8d9", fg="#0F401B")
         self.Description3.insert(END,"Take our interactive quiz to tell us about your preferences with regards to holidays \nand we will give you a customized recommendation suited for your individual needs and wishes!")
+        self.Description3.config(state=DISABLED)
         self.Description3.tag_configure("tag_name", justify='center')
         self.Description3.tag_add("tag_name", "1.0", "end")
 
