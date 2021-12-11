@@ -1,8 +1,9 @@
 import random
 from tkinter import *
+from tkinter import ttk
 
 
-from id3 import decTree
+from decision_algorithm import decTree
 import pandas as pd
 import QuestDictionaryHolidayMate 
 
@@ -35,10 +36,17 @@ class Quiz:
         clear()
         self.a1="yes"
         self.a2="no"
+<<<<<<< Updated upstream
         self.antw1 = Button(window, text="yes",font=("Arial",14), command=lambda: self.SetResponse(1))
         self.antw2 = Button(window, text="no",font=("Arial",14), command=lambda: self.SetResponse(0)) 
         self.naechste = Button(window,text="Next",font=("Arial",14),command=self.Question) # STILL OPEN: adjust to: only works if a button was clicked
         self.lock=False
+=======
+        self.answ1 = Button(window, text="Yes",font=("Arial",14), command=lambda: self.SetResponse(1))
+        self.answ2 = Button(window, text="No",font=("Arial",14), command=lambda: self.SetResponse(0)) 
+        self.next = Button(window,text="Next",font=("Arial",14),command=self.Question) 
+        self.lock = False
+>>>>>>> Stashed changes
         self.response = None
         self.nodes = []
         self.Question()
@@ -49,11 +57,13 @@ class Quiz:
         c, nn = D.getNextNode(self.nodes)
         if c == 0:
             self.lock = False
-            questiontext = (Quest_HM[nn], "?") # here we still need a nice display for the question 
+            questiontext = (str(Quest_HM[nn]))  
             question = Text(window, font=("Arial",14), width=40, height=2)
             question.insert(END,questiontext)
             question.grid(column=0, row=0, padx=80,pady=(75,0))
-
+            self.next.configure(state= DISABLED)
+            self.answ1.configure(bg="grey")
+            self.answ2.configure(bg="grey")
 
             self.antw1.grid(column=0, row=1,pady=(8,5))
             self.antw2.grid(column=0, row=2,pady=5)
@@ -69,12 +79,21 @@ class Quiz:
     def SetResponse(self,value):
         if self.lock == False: 
             if value == 1:
+<<<<<<< Updated upstream
                 self.antw1.configure(bg="green")
             else:
                 self.antw2.configure(bg="green")     
+=======
+                self.answ1.configure(bg="green")
+                self.next.configure (state= NORMAL)
+            else:
+                self.answ2.configure(bg="green")  
+                self.next.configure (state= NORMAL)
+>>>>>>> Stashed changes
             self.response = value
             self.nodes.append(value)
             self.lock = True
+            choice=None
 
 
 class Menu:
