@@ -13,7 +13,7 @@ import QuestDictionaryHolidayMate
 Quest_HM = QuestDictionaryHolidayMate.Quest_HM
 
 D = decTree()
-df = pd.read_csv("Database Holiday Mate - Sheet1.csv")
+df = pd.read_csv("/home/czlowiek/Documents/Python/Database_Holiday_Mate.csv")
 D.fit(df, maxDepth = 6)
 print(D.getTree())
 print("\n\n\n\n\n\n")
@@ -52,9 +52,9 @@ class Quiz:
 
         self.a1="yes"
         self.a2="no"
-
         self.answ1 = Button(window, text="Yes",font=("Arial",14), command=lambda: self.SetResponse(1),width=10, height=2,bd=0, highlightthickness=0, relief='ridge')
         self.answ2 = Button(window, text="No",font=("Arial",14), command=lambda: self.SetResponse(0),width=10, height=2,bd=0, highlightthickness=0, relief='ridge') 
+        self.clearing = Button(window,text="Clear",font=("Arial",14), command=lambda: self.QuestionClearer())
         self.next = Button(window,text="Next",font=("Arial",14),command=self.Question,width=10, height=2,bd=0, highlightthickness=0, relief='ridge')
         self.toMenu = Button(window, text="Back to Menu",font=("Arial",14),command=menuCreator, width=10, height=2,bd=0, highlightthickness=0, relief='ridge')
         self.lock = False
@@ -66,6 +66,9 @@ class Quiz:
     def Question(self): 
         self.next.grid(column=1,row=5,pady=(20,0),ipadx=2,sticky=SW)    
         c, nn = D.getNextNode(self.nodes)
+        self.answ1.grid(column=0, row=4,pady=(8,5), sticky=SE)
+        self.answ2.grid(column=1, row=4,pady=5, sticky=SW)
+        self.toMenu.grid(column=0,row=5,pady=(20,0),sticky=SE)
         if c == 0:
             self.lock = False
             questiontext = (str(Quest_HM[nn]))  
@@ -78,12 +81,6 @@ class Quiz:
             self.next.configure(state= DISABLED)
             self.answ1.configure(bg="grey")
             self.answ2.configure(bg="grey")
-
-
-
-            self.answ1.grid(column=0, row=4,pady=(8,5), sticky=SE)
-            self.answ2.grid(column=1, row=4,pady=5, sticky=SW)
-            self.toMenu.grid(column=0,row=5,pady=(20,0),sticky=SE)
 
         else:
         
@@ -122,18 +119,22 @@ class Quiz:
     def SetResponse(self,value):
         if self.lock == False: 
             if value == 1:
-   
                 self.answ1.configure(bg="green")
-                self.next.configure (state= NORMAL)
             else:
+
                 self.answ2.configure(bg="green")  
                 self.next.configure (state= NORMAL)
 
             self.response = value
             self.nodes.append(value)
             self.lock = True
-            choice=None
 
+    def QuestionClearer(self):
+        if self.lock == True: 
+            self.answ1.configure(bg="gray")
+            self.answ2.configure(bg="gray")     
+            self.nodes.pop(-1)
+            self.lock = False
 
 class Menu:
     def __init__(self):
