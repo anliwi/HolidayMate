@@ -1,8 +1,12 @@
 import random
 from tkinter import *
+import webbrowser
+import io
+import base64
+from urllib.request import urlretrieve
 from PIL import ImageTk, Image
 
-from id3 import decTree
+from decision_algorithm import decTree
 import pandas as pd
 import QuestDictionaryHolidayMate 
 
@@ -14,8 +18,6 @@ D.fit(df, maxDepth = 6)
 print(D.getTree())
 print("\n\n\n\n\n\n")
 
-
-
 window = Tk()
 window.title("Holiday_Mate")
 window.geometry("1000x600")
@@ -25,14 +27,14 @@ photo1 = photo.resize((300, 300), Image.ANTIALIAS)
 logo = ImageTk.PhotoImage(photo1)
 
 
+def callback(url):
+    webbrowser.open_new(url)
 
 def clear():
     list = window.grid_slaves()
     for n in list:
         n.destroy()
  
-
-
 
 class Quiz:
     def __init__(self): 
@@ -50,11 +52,12 @@ class Quiz:
 
         self.a1="yes"
         self.a2="no"
-        self.answ1 = Button(window, text="yes",font=("Arial",14), command=lambda: self.SetResponse(1),width=10, height=2,bd=0, highlightthickness=0, relief='ridge')
-        self.answ2 = Button(window, text="no",font=("Arial",14), command=lambda: self.SetResponse(0),width=10, height=2,bd=0, highlightthickness=0, relief='ridge') 
-        self.next = Button(window,text="Next",font=("Arial",14),command=self.Question,width=10, height=2,bd=0, highlightthickness=0, relief='ridge') # STILL OPEN: adjust to: only works if a button was clicked
+
+        self.answ1 = Button(window, text="Yes",font=("Arial",14), command=lambda: self.SetResponse(1),width=10, height=2,bd=0, highlightthickness=0, relief='ridge')
+        self.answ2 = Button(window, text="No",font=("Arial",14), command=lambda: self.SetResponse(0),width=10, height=2,bd=0, highlightthickness=0, relief='ridge') 
+        self.next = Button(window,text="Next",font=("Arial",14),command=self.Question,width=10, height=2,bd=0, highlightthickness=0, relief='ridge')
         self.toMenu = Button(window, text="Back to Menu",font=("Arial",14),command=menuCreator, width=10, height=2,bd=0, highlightthickness=0, relief='ridge')
-        self.lock=False
+        self.lock = False
         self.response = None
         self.nodes = []
         self.Question()
@@ -65,13 +68,17 @@ class Quiz:
         c, nn = D.getNextNode(self.nodes)
         if c == 0:
             self.lock = False
-            questiontext = (str(Quest_HM[nn])) 
+            questiontext = (str(Quest_HM[nn]))  
             question = Text(window, font=("Arial",20), width=60, height=1,bg="#f1f1f1",fg="#0F401B",highlightbackground="#0F401B")
             question.insert(END,questiontext)
             question.config(state=DISABLED)
             question.grid(column=0, row=2,columnspan=2,padx=200,sticky=N)
             question.tag_configure("tag_name", justify='center')
             question.tag_add("tag_name", "1.0", "end")
+            self.next.configure(state= DISABLED)
+            self.answ1.configure(bg="grey")
+            self.answ2.configure(bg="grey")
+
 
 
             self.answ1.grid(column=0, row=4,pady=(8,5), sticky=SE)
@@ -79,21 +86,53 @@ class Quiz:
             self.toMenu.grid(column=0,row=5,pady=(20,0),sticky=SE)
 
         else:
+        
+            for row in df.iterrows():
+                if row[1][0] == nn:
+                    url = row[1][-1]
+                    imgUrl = row[1][-3]
+                    desc = row[1][-2]
+                    break
+            
+            #print(nn + "\n" + url + "\n" + imgUrl + "\n" + desc + "\n\n\n")
+            
+            
+            
+            
             clear()
-            lb = Label(window, text="Our suggestion is: " + nn, font=("Arial",14))
+            lb = Label(window, text="Our suggestion is: " + nn, font=("Arial",14), cursor = "hand2", fg = "blue")
+            lb.bind("<Button-1>", lambda e: callback(url))
             lb.grid(column=0,row=0,padx=120,pady=(170,15))
+            dc = Label(window, text = desc)
+            dc.grid(column = 0, row = 1, padx = 120, pady = 120)
+            
+            try:
+                urlretrieve(imgUrl, "img.gif")
+                photo = ImageTk.PhotoImage(file = "img.gif")
+                lbimg = Label(window, image = photo)
+                lbimg.image = photo
+            except:
+                lbimg = Label(window, text="Image not found", font=("Arial",10), fg = "grey")
+                
+            lbimg.grid(row=2)
+            
             toMenu = Button(window, text="Back to Menu",font=("Arial",14),command=menuCreator, width=15, height=3)
-            toMenu.grid(column=0,row=1, padx=218,pady=170)
+            toMenu.grid(column=0,row=3, padx=218,pady=170)
         
     def SetResponse(self,value):
         if self.lock == False: 
             if value == 1:
-                self.antw1.configure(bg="green")
+   
+                self.answ1.configure(bg="green")
+                self.next.configure (state= NORMAL)
             else:
-                self.antw2.configure(bg="green")     
+                self.answ2.configure(bg="green")  
+                self.next.configure (state= NORMAL)
+
             self.response = value
             self.nodes.append(value)
             self.lock = True
+            choice=None
 
 
 class Menu:
