@@ -1,5 +1,10 @@
 import random
 from tkinter import *
+import webbrowser
+import io
+import base64
+from urllib.request import urlretrieve
+from PIL import ImageTk, Image
 
 
 from id3 import decTree
@@ -19,7 +24,9 @@ print("\n\n\n\n\n\n")
 window = Tk()
 window.title("Holiday_Mate")
 window.geometry("600x450")
- 
+
+def callback(url):
+    webbrowser.open_new(url)
 
  
 def clear():
@@ -60,11 +67,38 @@ class Quiz:
 
 
         else:
+        
+            for row in df.iterrows():
+                if row[1][0] == nn:
+                    url = row[1][-1]
+                    imgUrl = row[1][-3]
+                    desc = row[1][-2]
+                    break
+            
+            #print(nn + "\n" + url + "\n" + imgUrl + "\n" + desc + "\n\n\n")
+            
+            
+            
+            
             clear()
-            lb = Label(window, text="Our suggestion is: " + nn, font=("Arial",14))
+            lb = Label(window, text="Our suggestion is: " + nn, font=("Arial",14), cursor = "hand2", fg = "blue")
+            lb.bind("<Button-1>", lambda e: callback(url))
             lb.grid(column=0,row=0,padx=120,pady=(170,15))
+            dc = Label(window, text = desc)
+            dc.grid(column = 0, row = 1, padx = 120, pady = 120)
+            
+            try:
+                urlretrieve(imgUrl, "img.gif")
+                photo = ImageTk.PhotoImage(file = "img.gif")
+                lbimg = Label(window, image = photo)
+                lbimg.image = photo
+            except:
+                lbimg = Label(window, text="Image not found", font=("Arial",10), fg = "grey")
+                
+            lbimg.grid(row=2)
+            
             toMenu = Button(window, text="Back to Menu",font=("Arial",14),command=menuCreator, width=15, height=3)
-            toMenu.grid(column=0,row=1, padx=218,pady=170)
+            toMenu.grid(column=0,row=3, padx=218,pady=170)
         
     def SetResponse(self,value):
         if self.lock == False: 
