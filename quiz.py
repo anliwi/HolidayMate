@@ -7,7 +7,7 @@ from urllib.request import urlretrieve
 from PIL import ImageTk, Image
 
 
-from id3 import decTree
+from decision_algorithm import decTree
 import pandas as pd
 import QuestDictionaryHolidayMate 
 
@@ -19,15 +19,12 @@ D.fit(df, maxDepth = 6)
 print(D.getTree())
 print("\n\n\n\n\n\n")
 
-
-
 window = Tk()
 window.title("Holiday_Mate")
 window.geometry("600x450")
 
 def callback(url):
     webbrowser.open_new(url)
-
  
 def clear():
     list = window.grid_slaves()
@@ -35,16 +32,15 @@ def clear():
         n.destroy()
  
 
-
-
 class Quiz:
     def __init__(self): 
         clear()
         self.a1="yes"
         self.a2="no"
+
         self.answ1 = Button(window, text="Yes",font=("Arial",14), command=lambda: self.SetResponse(1))
         self.answ2 = Button(window, text="No",font=("Arial",14), command=lambda: self.SetResponse(0)) 
-        self.next = Button(window,text="Next",font=("Arial",14),command=self.Question) # STILL OPEN: adjust to: only works if a button was clicked
+        self.next = Button(window,text="Next",font=("Arial",14),command=self.Question) 
         self.lock = False
         self.response = None
         self.nodes = []
@@ -56,11 +52,13 @@ class Quiz:
         c, nn = D.getNextNode(self.nodes)
         if c == 0:
             self.lock = False
-            questiontext = (Quest_HM[nn], "?") # here we still need a nice display for the question 
+            questiontext = (str(Quest_HM[nn]))  
             question = Text(window, font=("Arial",14), width=40, height=2)
             question.insert(END,questiontext)
             question.grid(column=0, row=0, padx=80,pady=(75,0))
-
+            self.next.configure(state= DISABLED)
+            self.answ1.configure(bg="grey")
+            self.answ2.configure(bg="grey")
 
             self.answ1.grid(column=0, row=1,pady=(8,5))
             self.answ2.grid(column=0, row=2,pady=5)
@@ -103,12 +101,17 @@ class Quiz:
     def SetResponse(self,value):
         if self.lock == False: 
             if value == 1:
+   
                 self.answ1.configure(bg="green")
+                self.next.configure (state= NORMAL)
             else:
-                self.answ2.configure(bg="green")     
+                self.answ2.configure(bg="green")  
+                self.next.configure (state= NORMAL)
+
             self.response = value
             self.nodes.append(value)
             self.lock = True
+            choice=None
 
 
 class Menu:
