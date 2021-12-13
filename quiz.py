@@ -100,7 +100,7 @@ class Quiz:
 
             lb = Label(window, text="Our suggestion is: " + nn, font=("arial 20 bold"), cursor = "hand2", fg = "#0F401B",bg="#f4e8d9")
             lb.bind("<Button-1>", lambda e: callback(url))
-            lb.grid(column=0,row=1,columnspan=2, padx=10,sticky=N)
+            lb.grid(column=0,row=1,columnspan=2, padx=20)
 
             self.Destination = Text(window, height=25, width=50, bd=0, highlightthickness=0, relief='ridge')
             self.Destination.grid(column=1,row=2,sticky=NE)
@@ -116,13 +116,13 @@ class Quiz:
                 photo2 = Image.open("img.gif")
                 photoDest = photo2.resize((500,300), Image.ANTIALIAS)
                 photoD = ImageTk.PhotoImage(photoDest)
-                lbimg = Label(window, image = photoD,pady=10,bd=0, highlightthickness=0, relief='ridge')
+                lbimg = Label(window, image = photoD,bd=0, highlightthickness=0, relief='ridge')
                 lbimg.image = photoD
 
             except:
                 lbimg = Label(window, text="Image not found", font=("Arial",10), fg = "grey",bd=0, highlightthickness=0, relief='ridge')
                 
-            lbimg.grid(column=0,row=2,sticky=NW)
+            lbimg.grid(column=0,row=2,padx=10,sticky=NW)
             
             toMenu = Button(window, text="Back to Menu",font=("Arial",14),command=menuCreator, width=15, height=3)
             toMenu.grid(column=0,row=3,sticky=NE)
