@@ -15,12 +15,10 @@ Quest_HM = QuestDictionaryHolidayMate.Quest_HM
 D = decTree()
 df = pd.read_csv("Database Holiday Mate - Sheet1.csv")
 D.fit(df, maxDepth = 6)
-print(D.getTree())
-print("\n\n\n\n\n\n")
 
 window = Tk()
 window.title("Holiday_Mate")
-window.geometry("1000x600")
+window.geometry("1000x800")
 window.configure(bg="#f4e8d9")
 photo = Image.open("HolidayMate.png")
 photo1 = photo.resize((300, 300), Image.ANTIALIAS)
@@ -94,28 +92,40 @@ class Quiz:
             
             #print(nn + "\n" + url + "\n" + imgUrl + "\n" + desc + "\n\n\n")
             
-            
-            
-            
             clear()
-            lb = Label(window, text="Our suggestion is: " + nn, font=("Arial",14), cursor = "hand2", fg = "blue")
+
+            self.Logo = Label(window, image=logo,bd=0, highlightthickness=0, relief='ridge')
+            self.Logo.grid(column=0,row=0, columnspan=2,padx=50)
+
+
+            lb = Label(window, text="Our suggestion is: " + nn, font=("arial 20 bold"), cursor = "hand2", fg = "#0F401B",bg="#f4e8d9")
             lb.bind("<Button-1>", lambda e: callback(url))
-            lb.grid(column=0,row=0,padx=120,pady=(170,15))
-            dc = Label(window, text = desc)
-            dc.grid(column = 0, row = 1, padx = 120, pady = 120)
+            lb.grid(column=0,row=1,columnspan=2, padx=10,sticky=N)
+
+            self.Destination = Text(window, height=25, width=50, bd=0, highlightthickness=0, relief='ridge')
+            self.Destination.grid(column=1,row=2,sticky=NE)
+            self.Destination.config(font=("Arial", 12), bg="#f4e8d9", fg="#0F401B")
+            self.Destination.insert(END,desc)
+            self.Destination.config(state=DISABLED)
+            self.Destination.tag_configure("tag_name", justify='center')
+            self.Destination.tag_add("tag_name", "1.0", "end")
+
             
             try:
                 urlretrieve(imgUrl, "img.gif")
-                photo = ImageTk.PhotoImage(file = "img.gif")
-                lbimg = Label(window, image = photo)
-                lbimg.image = photo
+                photo2 = Image.open("img.gif")
+                photoDest = photo2.resize((500,300), Image.ANTIALIAS)
+                photoD = ImageTk.PhotoImage(photoDest)
+                lbimg = Label(window, image = photoD,pady=10,bd=0, highlightthickness=0, relief='ridge')
+                lbimg.image = photoD
+
             except:
-                lbimg = Label(window, text="Image not found", font=("Arial",10), fg = "grey")
+                lbimg = Label(window, text="Image not found", font=("Arial",10), fg = "grey",bd=0, highlightthickness=0, relief='ridge')
                 
-            lbimg.grid(row=2)
+            lbimg.grid(column=0,row=2,sticky=NW)
             
             toMenu = Button(window, text="Back to Menu",font=("Arial",14),command=menuCreator, width=15, height=3)
-            toMenu.grid(column=0,row=3, padx=218,pady=170)
+            toMenu.grid(column=0,row=3,sticky=NE)
         
     def SetResponse(self,value):
         if self.lock == False: 
