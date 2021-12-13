@@ -13,7 +13,7 @@ import QuestDictionaryHolidayMate
 Quest_HM = QuestDictionaryHolidayMate.Quest_HM
 
 D = decTree()
-df = pd.read_csv("Database Holiday Mate - Sheet1.csv")
+df = pd.read_csv("Database Holiday Mate.csv")
 D.fit(df, maxDepth = 6)
 
 window = Tk()
