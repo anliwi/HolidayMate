@@ -38,9 +38,21 @@ In order to use the decision aid's quiz you need to follow these steps:
    
 ## Used libraries: 
 
- * Numpy 
+ * numpy 
  
- * Pandas 
+ * pandas 
  
- * Tkinter 
+ * tkinter 
+ 
+ * random
+ 
+ * webbrowser
+ 
+ * io
+ 
+ * base64
+ 
+ * urllib.request
+ 
+ * PIL 
 
