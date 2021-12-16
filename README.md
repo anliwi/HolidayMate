@@ -1,17 +1,19 @@
-# HolidayMate
-***
+# HolidayMate 
+
+:compass:
 This repository contains the final assignment for the course Data Structures and Algorithms of Professor Hannah Bechara. The assignment was completed by a team of four first semester graduate students in the Masters of Data Science for Public Policy at Hertie School, Berlin.
 
 ***
 
-##**Product Description:**
+## Product Description:
 
-Ever wondered where to go on holiday in Germany? Well, we got a little something for you: The decision aid will determine the best destination for you. All you need to do is to answer a small set of questions about what you consider a perfect holiday. You will be able to indicate your preferences regarding for instance “Do you like camping?” or “How do you like to travel? Train/Bus/Bike”. Our decision algorithm will weigh those to create a customized recommendation suited for your individual needs and wishes.  The output will be a recommendations for a holiday destinations with a brief description.
+Ever wondered where to go on holiday in Germany? Well, we got a little something for you: The HolidayMate will determine the best destination for you. All you need to do is to answer a small set of questions about what you consider a perfect holiday. You will be able to indicate your preferences regarding for instance “Do you like camping?” or “How do you like to travel? Train/Bus/Bike”. Our decision algorithm will weigh those to create a customized recommendation suited for your individual needs and wishes.  The output will be a recommendations for a holiday destinations with a brief description.
 
 ***
-##**User Guide:**
 
-You decided to try our decision aid? Good choice! 
+## User Guide:
+
+You decided to try our destination finder? **Good choice!** 
 
 In order to use the decision aid's quiz you need to follow these steps: 
 
@@ -29,15 +31,15 @@ In order to use the decision aid's quiz you need to follow these steps:
    go through the questions. Please note that you can only click 'next' once you 
    have answered the current question. If you change your mind on a specific question      click the 'Clear' button. In order to return to the menu page while your taking the     quiz click on the 'Menu' button (be aware that in this case your progress will be       lost and you start the quiz from the beginning)
    
-   Happy travels!
+**Happy travels!**
    
    ***
    
-##**Used libraries: **
+## Used libraries: 
 
- *Numpy 
+ * Numpy 
  
- *Pandas 
+ * Pandas 
  
- *Tkinter 
+ * Tkinter 
 
