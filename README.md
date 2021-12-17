@@ -8,6 +8,8 @@ This repository contains the final assignment for the course Data Structures and
 
 Ever wondered where to go on holiday in Germany? Well, we got a little something for you: The HolidayMate will determine the best destination for you. All you need to do is to answer a small set of questions about what you consider a perfect holiday. You will be able to indicate your preferences regarding for instance “Do you like camping?” or “How do you like to travel? Train/Bus/Bike”. Our decision algorithm will weigh those to create a customized recommendation suited for your individual needs and wishes.  The output will be a recommendations for a holiday destinations with a brief description.
 
+**Documenttation can be found here integrated in the :**['scripts'](/tree/main/scripts)
+
 ***
 
 ## User Guide:
@@ -40,19 +42,19 @@ In order to use the decision aid's quiz you need to follow these steps:
 
 The first window you see once you run the quiz file:
 
-![The first window you see once you run the quiz file. ](https://github.com//anliwi/HolidayMate/blob/main/Window_1.jpg?raw=true)
+![The first window you see once you run the quiz file. ](https://github.com//anliwi/HolidayMate/blob/main/data/Window_1.jpg?raw=true)
 
 Once you entered the question answer mode you will see a window like this:
 
-![Once you entered the question answer mode you will see a window like this. ](https://github.com//anliwi/HolidayMate/blob/main/Window_2.jpg?raw=true)
+![Once you entered the question answer mode you will see a window like this. ](https://github.com//anliwi/HolidayMate/blob/main/data/Window_2.jpg?raw=true)
 
 After selecting your preference it appears green. The next button is activated and you can click it to get to the next question. You can click 'clear' to change your answer or retrun to the 'Back to Menu' to start from the beginning:
 
-![After selecting your preference it appears green. The next button is activated and you can click it to get to the next question. You can click 'clear' to change your answer or retrun to the 'menu' to start from the beginning. ](https://github.com//anliwi/HolidayMate/blob/main/Window_3.jpg?raw=true)
+![After selecting your preference it appears green. The next button is activated and you can click it to get to the next question. You can click 'clear' to change your answer or retrun to the 'menu' to start from the beginning. ](https://github.com//anliwi/HolidayMate/blob/main/data/Window_3.jpg?raw=true)
 
 Finally, you get a recommendation that looks like this:
 
-![Finally, you get a recommendation that looks like this. ](https://github.com/anliwi/HolidayMate/blob/main/Window_4.jpg?raw=true)
+![Finally, you get a recommendation that looks like this. ](https://github.com/anliwi/HolidayMate/blob/main/data/Window_4.jpg?raw=true)
 
 ***
    
@@ -75,4 +77,8 @@ Finally, you get a recommendation that looks like this:
  * urllib.request
  
  * PIL 
+ 
+## License
+
+The material in this repository is made available under the [MIT license](http://opensource.org/licenses/mit-license.php).
 
