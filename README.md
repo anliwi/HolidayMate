@@ -36,6 +36,18 @@ In order to use the decision aid's quiz you need to follow these steps:
    
    ***
    
+## Visual Sample
+
+![The first window you see once you run the quiz file ](https://github.com/[anliwi]/[HolidayMate]/blob/[main]/WIndow_1.jpg?raw=true)
+
+![Once you entered the question answer mode you will see a window like this. ](https://github.com/[anliwi]/[HolidayMate]/blob/[main]/WIndow_2.jpg?raw=true)
+
+![After selecting your preference it appears green. The next button is activated and you can click it to get to the next question. You can click 'clear' to change your answer or retrun to the 'menu' to start from the beginning. ](https://github.com/[anliwi]/[HolidayMate]/blob/[main]/WIndow_3.jpg?raw=true)
+
+![Finally, you get a recommendation that looks like this. ](https://github.com/[anliwi]/[HolidayMate]/blob/[main]/WIndow_4.jpg?raw=true)
+
+***
+   
 ## Used libraries: 
 
  * numpy 
