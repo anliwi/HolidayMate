@@ -8,7 +8,7 @@ This repository contains the final assignment for the course Data Structures and
 
 Ever wondered where to go on holiday in Germany? Well, we got a little something for you: The HolidayMate will determine the best destination for you. All you need to do is to answer a small set of questions about what you consider a perfect holiday. You will be able to indicate your preferences regarding for instance “Do you like camping?” or “How do you like to travel? Train/Bus/Bike”. Our decision algorithm will weigh those to create a customized recommendation suited for your individual needs and wishes.  The output will be a recommendations for a holiday destinations with a brief description.
 
-**Documentation can be found here :**['documentation'](https://github.com/anliwi/HolidayMate/main/documentation.txt)**
+**Documentation can be found here :**['documentation'](https://github.com/anliwi/HolidayMate/blob/main/documentation.txt)
 
 ***
 
