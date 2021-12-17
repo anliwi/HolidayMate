@@ -22,7 +22,7 @@ D.fit(df, maxDepth = 6)
 
 window = Tk()
 window.title("Holiday_Mate")
-window.geometry("1000x800")
+window.geometry("1100x800")
 window.configure(bg="#f4e8d9")
 photo = Image.open("HolidayMate.png")
 photo1 = photo.resize((300, 300), Image.ANTIALIAS)
