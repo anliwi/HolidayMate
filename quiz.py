@@ -1,3 +1,7 @@
+"""Code for the UI and displayed elements
+"""
+
+
 import random
 from tkinter import *
 import webbrowser
@@ -26,16 +30,96 @@ logo = ImageTk.PhotoImage(photo1)
 
 
 def callback(url):
+    """Used to link to a given url. Opens url in browser window.
+    
+    parameters
+    ----------------
+    url : str
+        the url to open in the browser
+    
+    returns
+    ----------------
+    None
+    
+    """
     webbrowser.open_new(url)
 
 def clear():
+    """Clears the current window of all UI elements.
+    
+    parameters
+    -----------------
+    None
+    
+    returns
+    -----------------
+    None
+    
+    """
     list = window.grid_slaves()
     for n in list:
         n.destroy()
  
 
 class Quiz:
+    """
+    
+    A class to represent the interactive stage of the User Interface on the window of the application.
+    
+    attributes
+    -----------------------
+    Logo : Label
+        The logo image.
+    QuestionTag : Text
+        The question to be asked to the user.
+    a1 : str
+    a2 : str
+    answ1 : Button
+        The affirmative answer button, calls setResponse().
+    answ2 : Button
+        The negative answer button, calls setResponse().
+    clearing : Button
+        Calls clear(), clears answer selection.
+    next : Button
+        Calls question(), displays next question.
+    toMenu : Button
+        Calls menuCreator(), goes back to main menu.
+    lock : bool
+        Mutex that prevents further appending of answers or loadng of questions until the first answer has been saved and the next question calculated.
+    response : bool
+        Stores current user response to latest question.
+    nodes : list
+        Values are alternating booleans and strings. Saves questions asked and user's answers in order for decision tree traversal.
+    
+    methods
+    -----------------------
+    question()
+        Calls decTree::getNextNode() to get the next node.
+        In case the next node is a question to ask, it loads and displays the question.
+        In case the next node is the final suggestion, it retrieves data for the suggestion from the database and displays it.
+    
+    setResponse(value : bool)
+        Sets response attribute to value.
+        Controlled by lock attribute.
+        
+    questionClearer()
+        Clears previously displayed question.
+    
+    """
     def __init__(self): 
+        """
+        
+        Constructor for quiz class. Sets class attributes. Calls question method.
+        
+        parameters
+        ----------------
+        None
+        
+        returns
+        ----------------
+        None
+        
+        """
         clear()
         self.Logo = Label(window, image=logo,bd=0, highlightthickness=0, relief='ridge')
         self.Logo.grid(column=0,row=0, columnspan=2,padx=50)
@@ -62,6 +146,21 @@ class Quiz:
 
 
     def Question(self): 
+        """
+        
+        Calls decTree::getNextNode() to get the next node.
+        In case the next node is a question to ask, it loads and displays the question.
+        In case the next node is the final suggestion, it retrieves data for the suggestion from the database and displays it.
+    
+        parameters
+        -------------------
+        None
+        
+        returns
+        -------------------
+        None
+        
+        """
         self.next.grid(column=1,row=5,pady=(20,0),ipadx=2,sticky=SW)    
         self.answ1.grid(column=0, row=4,pady=(8,5), sticky=SE)
         self.answ2.grid(column=1, row=4,pady=5, sticky=SW)
@@ -128,6 +227,21 @@ class Quiz:
             toMenu.grid(column=0,row=3,sticky=NE)
         
     def SetResponse(self,value):
+        """
+        
+        Sets response attribute to value.
+        Controlled by lock attribute.
+        
+        parameters
+        ------------------
+        value : bool
+            value to set the response to
+        
+        returns
+        ------------------
+        None
+       
+        """
         if self.lock == False: 
             if value == 1:
                 self.answ1.configure(bg="green")
@@ -142,6 +256,19 @@ class Quiz:
             self.lock = True
 
     def QuestionClearer(self):
+        """
+        
+        Clears previously displayed question.
+        
+        parameters
+        -------------------
+        None
+        
+        returns
+        -------------------
+        None
+        
+        """
         if self.lock == True: 
             self.answ1.configure(bg="grey")
             self.answ2.configure(bg="grey")     
@@ -150,6 +277,30 @@ class Quiz:
             self.lock = False
 
 class Menu:
+    """
+    
+    A class to represent the initial stage of the User Interface on the window of the application.
+    
+    attributes
+    ---------------------------
+    Quiz : Button
+        starts the quiz.
+    Logo : Label
+        The logo image.
+    Description1 : Text
+    Description2 : Text
+    Description3 : Text
+        Paragraphs of menu text.
+    Tag1 : Label
+    Tag2 : Label
+    Tag3 : Label
+        Menu labels.
+    
+    methods
+    ---------------------------
+    none
+    
+    """
     def __init__(self):
         clear()
         self.Quiz = Button(window, text="Get your holiday recommendation!", font="arial 14 bold", bg='white',fg="#0F401B", command=quizCreator, width=30, height=3,bd=0, highlightthickness=0, relief='ridge')
@@ -194,10 +345,20 @@ class Menu:
  
 
 def menuCreator():
+"""
+
+Creates object of Menu class to create and display menu.
+
+"""
     m = Menu()
  
 
 def quizCreator():
+"""
+
+Creates object of Quiz class to create and display quiz.
+
+"""
     q = Quiz()
  
 
