@@ -46,7 +46,7 @@ Once you entered the question answer mode you will see a window like this:
 
 ![Once you entered the question answer mode you will see a window like this. ](https://github.com//anliwi/HolidayMate/blob/main/Window_2.jpg?raw=true)
 
-After selecting your preference it appears green. The next button is activated and you can click it to get to the next question. You can click 'clear' to change your answer or retrun to the 'menu' to start from the beginning:
+After selecting your preference it appears green. The next button is activated and you can click it to get to the next question. You can click 'clear' to change your answer or retrun to the 'Back to Menu' to start from the beginning:
 
 ![After selecting your preference it appears green. The next button is activated and you can click it to get to the next question. You can click 'clear' to change your answer or retrun to the 'menu' to start from the beginning. ](https://github.com//anliwi/HolidayMate/blob/main/Window_3.jpg?raw=true)
 
