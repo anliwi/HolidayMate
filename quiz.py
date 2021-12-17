@@ -345,20 +345,20 @@ class Menu:
  
 
 def menuCreator():
-"""
+    """
 
-Creates object of Menu class to create and display menu.
+    Creates object of Menu class to create and display menu.
 
-"""
+    """
     m = Menu()
- 
+     
 
 def quizCreator():
-"""
+    """
 
-Creates object of Quiz class to create and display quiz.
+    Creates object of Quiz class to create and display quiz.
 
-"""
+    """
     q = Quiz()
  
 
