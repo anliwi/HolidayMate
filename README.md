@@ -1,6 +1,6 @@
 # HolidayMate  :compass:
 
-This repository contains the final assignment for the course Data Structures and Algorithms of Professor Hannah Bechara. The assignment was completed by a team of four first semester graduate students in the Masters of Data Science for Public Policy at Hertie School, Berlin.
+This repository contains the final assignment for the course Data Structures and Algorithms of Dr. Hannah Bechara. The assignment was completed by a team of four first semester graduate students in the Masters of Data Science for Public Policy at Hertie School, Berlin.
 
 ***
 
@@ -20,11 +20,11 @@ In order to use the decision aid's quiz you need to follow these steps:
 
 2) Download the repository to your machine 
 
-3) Open the ['quiz'](docs/quiz.py) file with an editor of your choice or your               terminal 
+3) Install the necessary libraries in case you do not have them in your environment        already (required libraries see below) 
 
-4) Install the necessary libraries in case you do not have them in your environment        already (required libraries see below) 
+4) Open the ['quiz'](docs/quiz.py) file with an editor of your choice or your               terminal 
 
-5) Run the 'quiz' file 
+5) In case you use an editor: run the 'quiz' file (otherwise skip this point)
 
 6) Voi-là, the quiz window opened on your screen. Now just click the button to start and
    go through the questions. Please note that you can only click 'next' once you 
