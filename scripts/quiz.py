@@ -17,14 +17,14 @@ import QuestDictionaryHolidayMate
 Quest_HM = QuestDictionaryHolidayMate.Quest_HM
 
 D = decTree()
-df = pd.read_csv("Database Holiday Mate.csv")
+df = pd.read_csv("../data/Database Holiday Mate.csv")
 D.fit(df, maxDepth = 6)
 
 window = Tk()
 window.title("Holiday_Mate")
 window.geometry("1100x800")
 window.configure(bg="#f4e8d9")
-photo = Image.open("HolidayMate.png")
+photo = Image.open("../data/HolidayMate.png")
 photo1 = photo.resize((300, 300), Image.ANTIALIAS)
 logo = ImageTk.PhotoImage(photo1)
 
